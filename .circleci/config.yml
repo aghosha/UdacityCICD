@@ -2,26 +2,18 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-jobs:
-  print-hello:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "Say hello"
-          command: "echo Hello!"
-
-  print-helloworld:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
 workflows:
-  say-hello-workflow:
+  test-environment-var:
     jobs:
-      - print-hello
-      - print-helloworld:
-          requires:
-            - "print-hello"
+      - print-environment-var
+      
+jobs:
+  print-environment-var:
+    docker:
+      - image: cimg/base:2023.06
+    Steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $Udacity_Nm_Var 
