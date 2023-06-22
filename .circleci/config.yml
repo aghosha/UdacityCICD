@@ -3,17 +3,17 @@
 version: 2.1
 
 workflows:
-  test-environment-var:
+  test-env-vars:
     jobs:
-      - print-environment-var
-      
+      - build
+
 jobs:
-  print-environment-var:
+  build:
     docker:
-      - image: cimg/base:2023.06
-    Steps:
+      - image: cimg/base:2020.01
+    steps:
       - checkout
       - run:
           name: "echo an env var that is part of our project"
           command: |
-            echo $Udacity_Nm_Var 
+            echo $Udacity_Nm_Var
