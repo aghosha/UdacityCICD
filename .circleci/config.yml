@@ -7,7 +7,14 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello!"
+
+  print-helloworld:
+    docker:
+      - image: cimg/base:stable
+    steps:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
@@ -15,3 +22,6 @@ workflows:
   say-hello-workflow:
     jobs:
       - print-hello
+      - print-helloworld:
+          requires:
+            - "print-hello"
